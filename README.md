@@ -1,2 +1,2 @@
-# quarterway-services
+# quaway
 A travel agency service
