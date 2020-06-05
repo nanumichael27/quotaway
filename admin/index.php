@@ -1,7 +1,10 @@
 
 
 
-      <?php include_once('header.php'); ?>
+      <?php include_once('header.php'); 
+        echo "<script> window.location ='posts.php';</script>";
+      ?>
+
       <?php 
             $totalUsers = mysqli_num_rows(mysqli_query($link, "SELECT * FROM users"));
             $totalReferrals = mysqli_num_rows(mysqli_query($link, "SELECT * FROM referrals"));

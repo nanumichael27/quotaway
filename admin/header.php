@@ -80,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Vintek</b>Global</span>
+        <span class="logo-lg"><b>Quotaway</b></span>
       </a>
               
               <!-- Header Navbar -->
@@ -204,7 +204,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           </p>
                         </li>
                         <!-- Menu Body -->
-                        <li class="user-body">
+                        <!-- <li class="user-body">
                           <div class="col-xs-4 text-center">
                             <a href="#">Followers</a>
                           </div>
@@ -214,11 +214,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <div class="col-xs-4 text-center">
                             <a href="#">Friends</a>
                           </div>
-                        </li>
+                        </li> -->
                         <!-- Menu Footer-->
                         <li class="user-footer">
                           <div class="pull-left">
-                            <a href="updateprofile.php" class="btn btn-default btn-flat">Profile</a>
+                            <a href="posts.php" class="btn btn-default btn-flat">Add post</a>
                           </div>
                           <div class="pull-right">
                             <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
