@@ -1,6 +1,3 @@
-<?php
-require 'connection.php';
-?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>    
@@ -69,6 +66,12 @@ require 'connection.php';
                 $category_id = $_GET['category_id'];
                 $query = "SELECT * FROM posts
                  WHERE post_category_id = '$category_id' AND post_status = 'publish' ORDER BY post_id DESC LIMIT $page_1,$per_page";
+			}
+
+			if(isset($_GET['tag'])){
+                global $query;
+                $tag = $_GET['tag'];
+                $query = "SELECT * FROM posts WHERE post_tags LIKE '%$tag%' AND post_status = 'publish' ORDER BY post_id DESC LIMIT $page_1,$per_page";
             }
             
 
@@ -84,7 +87,12 @@ require 'connection.php';
                 $post_tags = $row['post_tags'];
                 $post_image = $row['post_image'];
                 $post_content = substr($row['post_content'],0,400).'...';
-                $post_status = $row['post_status']; 
+				$post_status = $row['post_status'];
+				$post_date = str_replace(',', '', $post_date);
+				$fancyDate = explode(' ', $post_date);
+				$month =   substr($fancyDate[1], 0 ,3);
+				$day = $fancyDate[2];
+
             
 ?>
 
@@ -93,9 +101,9 @@ require 'connection.php';
 					<div class="single-item">
 						<div class="img-box">
 							<a href="blog-post.php?post_id=<?php echo $post_id; ?>"><img src="admin/dist/img/blog/<?php echo$post_image; ?>" alt="" class="img-responsive"></a>
-							<span><a href="#" class="overlay"></a></span>
+							<span><a href="blog-post.php?post_id=<?php echo $post_id; ?>" class="overlay"></a></span>
 							<div class="img-caption">
-								<p class="date"><span>24</span><span>Mar</span></p>
+								<p class="date"><span><?=$month?></span><span><?=$day?></span></p>
 							</div>
 						</div>
 						<div class="single-text-box">
@@ -228,7 +236,7 @@ require 'connection.php';
 ?>
 								<div class="col-sm-12 recent-single">
 									<div class="recent-content-item">
-										<div class="img-box"><a href="#">
+										<div class="img-box"><a href="blog-post.php?post_id=<?php echo $post_id; ?>">
 										<img src="admin/dist/img/blog/<?php echo $post_image; ?>" alt=""></a></div>
 										<div class="recent-text pull-right">
 							                <a href="blog-post.php?post_id=<?php echo $post_id; ?>"> <?php echo $post_title; ?> </a>
@@ -241,7 +249,7 @@ require 'connection.php';
 }
 ?>
 
-								<div class="col-sm-12 recent-single">
+								<!-- <div class="col-sm-12 recent-single">
 									<div class="recent-content-item">
 										<div class="img-box"><a href="#">
 										<img src="images/blog/recent-work-02.jpg" alt=""></a></div>
@@ -251,9 +259,9 @@ require 'connection.php';
 											<i class="fa fa-comments"></i>0</span></p>
 							            </div>
 									</div>
-								</div><!-- /.recent-single-item -->
+								</div>/.recent-single-item -->
 
-								<div class="col-sm-12 recent-single blog-padding-none">
+								<!-- <div class="col-sm-12 recent-single blog-padding-none">
 									<div class="recent-content-item">
 										<div class="img-box"><a href="#">
 										<img src="images/blog/recent-work-02.jpg" alt=""></a></div>
@@ -263,7 +271,7 @@ require 'connection.php';
 											<i class="fa fa-comments"></i>0</span></p>
 							            </div>
 									</div>
-								</div><!-- /.recent-single-item -->
+								</div>/.recent-single-item -->
 							</div>
 						</div>	
 
@@ -274,12 +282,28 @@ require 'connection.php';
 							<div class="categories-item">
 								<h3>Categories</h3>
 								<ul class="list-unstyled">
-									<li><a href="#"><i class="fa fa-angle-right"></i> Qs-Hub <span>(0)</span></a></li>
+					<?php
+                        $category_query = "SELECT * FROM categories";
+                         $categories = mysqli_query($link, $category_query);
+                         $allPosts = mysqli_num_rows(mysqli_query($link,"SELECT * FROM posts"));
+					?>
+					<li><a href="blog.php"><i class="fa fa-angle-right"></i> All <span>(<?=$allPosts?>)</span></a></li>
+					<?php 
+                        while($cat = mysqli_fetch_assoc($categories)){
+                            $title = $cat['cat_title'];
+                            $id = $cat['cat_id'];
+                            $numberOfPosts = mysqli_num_rows(mysqli_query($link,"SELECT * FROM posts
+                             WHERE post_category_id ='$id' AND post_status = 'publish' "));
+							// echo "<li class='cat-item cat-item-3'><a href='blog.php?category_id=$id'>$title</a> ($numberOfPosts)</li>";
+							echo"<li><a href='blog.php?category_id=$id'><i class='fa fa-angle-right'></i> $title <span>($numberOfPosts)</span></a></li>";
+                        }
+                        ?>
+									<!-- <li><a href="#"><i class="fa fa-angle-right"></i> Qs-Hub <span>(0)</span></a></li>
 									<li><a href="#"><i class="fa fa-angle-right"></i> Academics <span>(0)</span></a></li>
 									<li><a href="#"><i class="fa fa-angle-right"></i> Works <span>(0)</span></a></li>
 									<li><a href="#"><i class="fa fa-angle-right"></i> Abroad <span>(0)</span></a></li>
 									<li><a href="#"><i class="fa fa-angle-right"></i> Study  <span>(0)</span></a></li>
-									<li><a href="#"><i class="fa fa-angle-right"></i> Travels <span>(0)</span></a></li>
+									<li><a href="#"><i class="fa fa-angle-right"></i> Travels <span>(0)</span></a></li> -->
 								</ul>
 							</div>
 						</div>

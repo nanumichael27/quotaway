@@ -1,4 +1,8 @@
-    <meta charset="utf-8">
+	<?php 
+	include 'connection.php';
+	?>
+	
+	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="description" content="Quota Way Services is an Educational consultancy firm. 
 							 We have since 2018 created opportunities in sync with our aim of 
