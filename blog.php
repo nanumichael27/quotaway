@@ -1,3 +1,6 @@
+<?php
+require 'fils/connection.php';
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>    
@@ -23,54 +26,99 @@
 </header>
 	<!--  End header section-->
 
-
-<div class="blog-area">
+	<div class="blog-area">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 bolg_side-left">
+<?php
+            $per_page = 3;
+            if(isset($_GET['page'])){
+                $page = $_GET['page'];
+                } else {
+                    $page = "";
+                }
+            if($page == "" || $page == 1){
+                $page_1 = 0;
+            } else {
+                $page_1 = ($page * $per_page) - $per_page;
+            }
+            ?>
+                <?php
+            if(isset($_SESSION['admin_id'])){
+                $post_query_count = "SELECT * FROM posts";
+            } else {
+                $post_query_count = "SELECT * FROM posts WHERE post_status = 'publish'";
+            }
+            $find_count = mysqli_query($link, $post_query_count);
+            $count = mysqli_num_rows($find_count);
+            if($count < 1){
+                echo "<center><div class='alert alert-info'><strong>Sorry!</strong> No post abilable.....</div></center>";
+            }
+            else {
+            $count = ceil($count / 5);
+            $query = "SELECT * FROM posts ORDER BY post_id DESC  LIMIT $page_1,$per_page";
+
+            if(isset($_GET['search'])){
+                global $query;
+                $search = $_GET['search'];
+                $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%' OR post_title LIKE 
+                '%$search%' AND post_status = 'publish' ORDER BY post_id DESC LIMIT $page_1,$per_page";
+            }
+
+            if(isset($_GET['category_id'])){
+                $category_id = $_GET['category_id'];
+                $query = "SELECT * FROM posts
+                 WHERE post_category_id = '$category_id' AND post_status = 'publish' ORDER BY post_id DESC LIMIT $page_1,$per_page";
+            }
+            
+
+
+            if(mysqli_num_rows($select_all_posts_query = mysqli_query($link,$query)) <= 0){
+                echo "<center><div class='alert alert-info'><strong>Sorry!</strong> No post abilable.....</div></center>"; 
+            }else{
+            while($row = mysqli_fetch_assoc($select_all_posts_query)){
+                $post_id = $row['post_id'];
+                $post_title = $row['post_title'];
+                $post_author = $row['post_author'];
+                $post_date = $row['post_date'];
+                $post_tags = $row['post_tags'];
+                $post_image = $row['post_image'];
+                $post_content = substr($row['post_content'],0,400).'...';
+                $post_status = $row['post_status']; 
+            
+?>
+
+
 				<div class="col-sm-12 single-item-box">
 					<div class="single-item">
 						<div class="img-box">
-							<a href="blog-post.php"><img src="images/blog/blog-01.jpg" alt="" class="img-responsive"></a>
+							<a href="blog-post.php?post_id=<?php echo $post_id; ?>"><img src="images/blog/blog-01.jpg" alt="" class="img-responsive"></a>
 							<span><a href="#" class="overlay"></a></span>
 							<div class="img-caption">
 								<p class="date"><span>24</span><span>Mar</span></p>
 							</div>
 						</div>
 						<div class="single-text-box">
-							<h3><a href="index.php"> The Uniqueness of QS-Hub </a></h3>
+							<h3><a href="blog-post.php?post_id=<?php echo $post_id; ?>"> <?php echo $post_title; ?> </a></h3>
 							<ul class="list-unstyled">
-								<li><a href="#">By Admin</a></li>
-								<li><a href="#">20 March, 2020 </a></li>
-								<li><a href="#"> 0 comments </a></li>	
+								<li><a href="blog-post.php?post_id=<?php echo $post_id; ?>">By Admin</a></li>
+								<li><a href="blog-post.php?post_id=<?php echo $post_id; ?>">20 March, 2020 </a></li>
+								<li><a href="blog-post.php?post_id=<?php echo $post_id; ?>"> 0 comments </a></li>	
 							</ul>
 							<p>
-							The QS Hub is a subsidiary of the quota way services. 
-							It's an Educaonal hub which provides a creave and technology driven 
-							space for young persons to interact, learn and network. 
-							Our vision is to develop the next generaon of African leaders by providing 
-							them with quality educaon and expose them to new learning experiences and methods.
-							The Hub provides a plaorm where persons can achieve both their educaonal and professional dreams.
-						    </p>
-							<strong> WHAT WE OFFER: </strong> 
-							<p>
-							Training Programs at QS HUB, you can enroll in one or more of our educaonal programs designed 
-							by our experienced educational consultants and tutors to give our students their best learning experience, yet.
-							Some of our courses include SAT IELTS GMAT ICAN BUSINESS AND LEADERSHIP DEVELOPMENT. ETC. 
-							Mini Event Space: The QS HUB is event friendly. 
-							It is very conducive for events for not more than 40 persons.
-							It is full air condioned, constant power supply, excellent interior design and 24/7data connecon. 
-							The hub is also equipped with a digital Library for students to study and do research. 
-							You can register with us and enjoy free internet connecon and endless research materials
-							</p>
+							<?php echo $post_content; ?>
 							<div class="blog-btn-box">
-								<a href="blog-post.php">Read More</a>
+								<a href="blog-post.php?post_id=<?php echo $post_id; ?>">Read More</a>
 							</div>
 						</div>
 					</div>
 				</div>
+				<?php
+                                    }}}
+                ?>
 
-				<div class="col-sm-12 single-item-box">
+
+				<!-- <div class="col-sm-12 single-item-box">
 					<div class="single-item">
 						<div class="img-box">
 							<a href="blog-post.php">
@@ -130,7 +178,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 
 				<div class="row">
