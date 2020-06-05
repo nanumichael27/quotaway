@@ -1,5 +1,5 @@
 <?php
-require 'fils/connection.php';
+require 'connection.php';
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -92,7 +92,7 @@ require 'fils/connection.php';
 				<div class="col-sm-12 single-item-box">
 					<div class="single-item">
 						<div class="img-box">
-							<a href="blog-post.php?post_id=<?php echo $post_id; ?>"><img src="images/blog/blog-01.jpg" alt="" class="img-responsive"></a>
+							<a href="blog-post.php?post_id=<?php echo $post_id; ?>"><img src="admin/dist/img/blog/<?php echo$post_image; ?>" alt="" class="img-responsive"></a>
 							<span><a href="#" class="overlay"></a></span>
 							<div class="img-caption">
 								<p class="date"><span>24</span><span>Mar</span></p>
@@ -206,6 +206,8 @@ require 'fils/connection.php';
 				</div>	
 			</div>
 
+
+
 			<div class="col-sm-4 blog_side-right">
 				<div class="sidebar-content">
 
@@ -213,17 +215,31 @@ require 'fils/connection.php';
 					<div class="col-sm-12 recent-post-01">
 							<h3> Recent Posts </h3>
 							<div class="row">
+
+
+<?php
+	$query = "SELECT * FROM posts WHERE post_status = 'publish' ORDER BY post_id DESC LIMIT 3";
+	$result = mysqli_query($link, $query);
+	while($row = mysqli_fetch_assoc($result)){
+			$post_id = $row['post_id'];
+			$post_title = $row['post_title'];
+			$post_date = $row['post_date'];
+			$post_image = $row['post_image'];
+?>
 								<div class="col-sm-12 recent-single">
 									<div class="recent-content-item">
 										<div class="img-box"><a href="#">
-										<img src="images/blog/recent-01.jpg" alt=""></a></div>
+										<img src="admin/dist/img/blog/<?php echo $post_image; ?>" alt=""></a></div>
 										<div class="recent-text pull-right">
-							                <a href="#"> Study and Live in Cyrpus with #700, 000 </a>
-							                <p>20 Mar, 2020 <span class="content">
+							                <a href="blog-post.php?post_id=<?php echo $post_id; ?>"> <?php echo $post_title; ?> </a>
+							                <p><?php echo $post_date; ?><span class="content">
 											<i class="fa fa-comments"></i>0</span></p>
 							            </div>
 									</div>
 								</div><!-- /.recent-single-item -->
+<?php 
+}
+?>
 
 								<div class="col-sm-12 recent-single">
 									<div class="recent-content-item">
