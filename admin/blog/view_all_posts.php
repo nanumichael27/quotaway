@@ -172,7 +172,7 @@ msg_show($msg, $msg2);
             echo "<td>$post_title</td>";
             echo "<td><a href='../category.php?category={$cat_id}'>$cat_title</a></td>";
             echo  "<td>$post_status</td>";
-            echo  "<td><img width='100' src='../images/post_pic/$post_image' alt='image'/></td>";
+            echo  "<td><img width='100' src='dist/img/blog/$post_image' alt='image'/></td>";
             echo  "<td>$post_tags</td>";
             echo  "<td>$post_comment_count</td>";
             echo  "<td>$post_date</td>";

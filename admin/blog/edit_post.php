@@ -29,12 +29,12 @@ while($row = mysqli_fetch_assoc($select_post_by_id)){
 
         $post_image = $_FILES['image']['name'];
         $post_image_temp = $_FILES['image']['tmp_name'];
-        move_uploaded_file($post_image_temp, "../images/post_pic/$post_image");
+        move_uploaded_file($post_image_temp, "dist/img/blog/$post_image");
 
         $post_tags = $_POST['post_tags'];
         $post_content = escape($_POST['post_content']);
 
-        move_uploaded_file($post_image_temp, "../images/post_pic/$post_image");
+        move_uploaded_file($post_image_temp, "dist/img/blog/$post_image");
         if(empty($post_image)){
             $query = "SELECT * FROM posts WHERE post_id = $p_id ";
             $select_image = mysqli_query($link, $query);
@@ -121,7 +121,7 @@ while($row = mysqli_fetch_assoc($select_post_by_id)){
             </tbody>
         </table>
         <div class="form-group">
-            <label for="post_image">Post Image</label> <img width="100" src="../images/post_pic/<?php echo $post_image; ?>" alt="image">
+            <label for="post_image">Post Image</label> <img width="100" src="dist/img/blog/<?php echo $post_image; ?>" alt="image">
             <input type="file" name="image"> </div>
         <div class="form-group">
             <label for="post_tags">Tags</label>
