@@ -28,7 +28,7 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="#"><b>Vintek</b>Admin</a>
+        <a href="#"><b>Quotaway</b>Admin</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>

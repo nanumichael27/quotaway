@@ -50,6 +50,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style>
+      .delete-from-gallery-button{
+        padding: 13px;
+        font-size: 21px;
+        position: relative;
+        background: #ff4b4b;
+        border-radius: 81%;
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        float: right;
+        line-height: 23px;
+        margin-top: 5px;
+        cursor: pointer;
+        color: white;
+      }
+
+      .delete-from-gallery-button:hover{
+        background-color: red;
+        color: white;
+      }
+
+      .delete-from-gallery-button:active{
+        border: 1px solid black;
+        background-color: white;
+        color: red;
+
+      }
+
+      /* .delete-from-gallery-button i{
+        color: white;
+      } */
+
+
+    </style>
   </head>
   <!--
   BODY TAG OPTIONS:

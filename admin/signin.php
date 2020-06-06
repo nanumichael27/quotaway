@@ -33,9 +33,9 @@ function getUserContent($user, $content){
 }
 
 
-function adminExists($username){
-    if(contextExists('username', $username)) return true; else return false;
-}
+// function adminExists($username){
+//     if(contextExists('username', $username)) return true; else return false;
+// }
 
 // function contextExists($context, $value){
 //     $link = $GLOBALS['link'];
