@@ -8,8 +8,8 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Header
-      <small>Description</small>
+      Gallery
+      <small>Add or Remove photos from your gallery</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> dashboard</a></li>

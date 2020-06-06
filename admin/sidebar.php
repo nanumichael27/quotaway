@@ -63,7 +63,7 @@
               </ul>
             </li> -->
             <!-- <li class=""><a href="earnings.php"><i class="fa fa-money"></i> <span>Earnings</span></a></li> -->
-            <li><a href="#"><i class="fa fa-spinner"></i> <span>Gallery</span></a></li>
+            <li><a href="gallery.php"><i class="fa fa-spinner"></i> <span>Gallery</span></a></li>
             <!-- <li><a href="#"><i class="fa fa-spinner"></i> <span>Faq</span></a></li>
             <li><a href="#"><i class="fa fa-spinner"></i> <span>Testimonials</span></a></li>
             <li class=""><a href="#"><i class="fa fa-ticket"></i> <span>Support Ticket</span></a></li> -->
