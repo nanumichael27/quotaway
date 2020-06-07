@@ -49,9 +49,10 @@
 					<h3>Get in touch</h3>
 					<p>Enter your email and we'll send you more information.</p>
 
-					<form action="#">
+					<form action="" id="js-newsletter-form">
 						<div class="form-group">
-							<input placeholder="Your Email" type="email" required="">
+							<input placeholder="Your Name" type="text" required name="name">
+							<input placeholder="Your Email" type="email" required="" name="email">
 							<div class="submit-btn">
 								<button type="submit" class="text-center">Subscribe</button>
 							</div>

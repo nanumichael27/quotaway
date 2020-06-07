@@ -6,7 +6,6 @@
 </head>
 <body class="contact">
 <?php require_once 'fils/headnav.php';  ?>
-<?php require_once 'fils/db_connect.inc.php'; ?>
 
 <div class="container">
 			<div class="row">
@@ -22,57 +21,7 @@
 </div>
 </header>
 <!--  End header section-->
-<?php       				
-    if(isset($_POST['create'])){
-	unset($_POST['create']);
-	$email =mysqli_real_escape_string($dtech,trim($_POST['email']));
-	$fname = mysqli_real_escape_string($dtech,trim($_POST['fname']));
-	$tel = mysqli_real_escape_string($dtech,trim($_POST['tel']));
-	$count = mysqli_real_escape_string($dtech,trim($_POST['count']));
-	$datein = date('D-M-Y/ h-i-s');  
-    $query_email = mysqli_query($dtech,"select * from contacts where email ='$email' ") or
-     die(mysqli_error($dtech));
-	if(mysqli_num_rows($query_email) > 0){
-		echo '<div class="alert alert-danger"><center>
-		<span class="glyphicon glyphicon-remove"></span><hr/>
-		 You have already applied.</center>
-		</div>';
-	}
-else {
-$insert = mysqli_query($dtech,"insert into contacts (fname,tel,email,count,datein)
- value('$fname','$tel','$email','$count','$datein')") or
-  die(mysqli_error($dtech)); 
 
-if($insert){
-
-$to      = 'info@quotawayservices.com'; // Send email to our user
-$subject = 'New Contact E-Mail'; // Give the email a subject 
-$message = 'Name: '.$fname. "\r\n"
-           .'Email :'.$email."\r\n"
-		   .'Phone Number :'.$tel."\r\n"
-		   .'Message :'.$count."\r\n";
-                     
-$headers = 'From:admin@quotawayservices.com' . "\n"; // Set from headers
-
-mail($to, $subject, $message, $headers);
-    echo'<div class="alert alert-success">
-    <center><h3>
-           Your Message have been Received, We will be in touch with you very soon. 
-    </h3></center>
-		 <hr/>
-        </div>';
-}
-
-else {
-	echo '<div class="alert alert-danger"><center>
-		<br/>
-		OOps, something went wrong,please try again.</center>
-		</div>';
-}
-
-}       				
-  
-}?> 
 <!-- Contact Area section -->
 <section class="contact-area-02">
 	<div class="container">
@@ -137,7 +86,7 @@ else {
 					<div id="contact">
 					<div id="message"></div>	                       
                     <form method="post" enctype="multipart/form-data" 
-                          action="<?php  echo $_SERVER['PHP_SELF'];  ?>">
+                          action="<?php  echo $_SERVER['PHP_SELF'];  ?>" id="js-contact-form">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -182,6 +131,35 @@ else {
 
 <!-- ./ End Footer Area-->
 <?php require_once 'fils/scripts.php';  ?>
+<script>
+    		 $('#js-contact-form').submit(function(event){
+          event.preventDefault();
+          let datatopost = $(this).serializeArray();
+          datatopost.push({name: 'contact', value: 1});
+          console.log(datatopost);
+
+          $.ajax({
+                url: 'contact_proc.php',
+                type: 'POST',
+                data: datatopost,
+                beforeSend:function(){
+                  toastr.info('Processing');
+                },
+                success: function(data){
+                    if(data.trim() == 'success'){
+                        toastr.clear();
+                        swal('Success', "Your Message have been Received, We will be in touch with you very soon.", "success");
+                    }else{
+                        toastr.clear();
+                        swal('Unsuccessful!' ,data, 'warning');
+                    }
+                },
+                error: function(){
+                    swal('Network error','Please check your network connection', 'error');
+                }
+            });
+        });
+</script>
 
 </body>
 </html>

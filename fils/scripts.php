@@ -38,3 +38,32 @@
 	<script src="assets/js/toastr.min.js"></script>
 	<!-- Custom JS -->
 	<script src="js/custom.js"></script>
+	<script>
+		 $('#js-newsletter-form').submit(function(event){
+          event.preventDefault();
+          let datatopost = $(this).serializeArray();
+          datatopost.push({name: 'newsletter', value: 1});
+          console.log(datatopost);
+
+          $.ajax({
+                url: 'newsletter_proc.php',
+                type: 'POST',
+                data: datatopost,
+                beforeSend:function(){
+                  toastr.info('Processing');
+                },
+                success: function(data){
+                    if(data.trim() == 'success'){
+                        toastr.clear();
+                        swal('Success', "You Have successfully subscribed for newsletters, You will receive frequent updates from now on", "success");
+                    }else{
+                        toastr.clear();
+                        swal('Unsuccessful!' ,data, 'warning');
+                    }
+                },
+                error: function(){
+                    swal('Network error','Please check your network connection', 'error');
+                }
+            });
+        });
+	</script>
