@@ -34,5 +34,7 @@
 	<script type="text/javascript" src="js/assets/revolution/extensions/revolution.extension.slideanims.min.js"></script>
 	<script type="text/javascript" src="js/assets/revolution/extensions/revolution.extension.video.min.js"></script>
 	<script type="text/javascript" src="js/assets/revolution/revolution.js"></script>
+	<script src="assets/js/sweetalert.min.js"></script>
+	<script src="assets/js/toastr.min.js"></script>
 	<!-- Custom JS -->
 	<script src="js/custom.js"></script>

@@ -34,3 +34,4 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="assets/css/toastr.min.css">
