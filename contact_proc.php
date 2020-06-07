@@ -20,7 +20,7 @@
             
         $to      = 'info@quotawayservices.com'; // Send email to our user
         $subject = 'New Contact E-Mail'; // Give the email a subject 
-        $message = 'Name: '.$fname. "\r\n"
+        $message = 'Name: '.$name. "\r\n"
                 .'Email :'.$email."\r\n"
                 .'Phone Number :'.$tel."\r\n"
                 .'Message :'.$count."\r\n";                 
