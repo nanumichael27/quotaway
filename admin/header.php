@@ -35,6 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="dist/css/croppie.css">
+    <link rel="stylesheet" href="../assets/css/toastr.min.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
@@ -53,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <style>
       .delete-from-gallery-button{
-        padding: 13px;
+        padding: 13px;  
         font-size: 21px;
         position: relative;
         background: #ff4b4b;

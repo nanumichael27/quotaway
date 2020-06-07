@@ -26,18 +26,26 @@
 <div class="section-paddings gallery-images event-01">
 	<div class="container">
 		<div class="row gallery_img_wrapper">
+
+		<?php
+        $gallery = R::getAll('SELECT * FROM gallery');
+        foreach ($gallery as $item) {
+        ?>
 			<div class="col-12 col-sm-6 col-md-6 col-lg-4">
 				<div class="single-gallery">
 					<figure>     
-						<img src="images/index-04/courses-01.jpg" alt="">
+						<img src="admin/dist/img/gallery/<?=$item['image']?>" alt="">
 						<figcaption>
-							<a href="images/index-04/courses-01.jpg" title=""><i class="fa fa-eye"></i></a>
-							<h4>Caption <span>Education Class</span></h4>
-							<h3>Caption By: <span>Michel Jusi</span></h3>
+							<a href="admin/dist/img/gallery/<?=$item['image']?>" title=""><i class="fa fa-eye"></i></a>
+							<h4>Caption <span><?=$item['caption']?></span></h4>
+							<h3>Caption By: <span>Admin</span></h3>
 						</figcaption>
 					</figure>
 				</div>
 			</div> <!-- end single-gallery -->
+			<?php
+		}
+			?>
 
 			<div class="col-12 col-sm-6 col-md-6 col-lg-4">
 				<div class="single-gallery">
